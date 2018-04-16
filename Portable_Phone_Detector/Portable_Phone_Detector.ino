@@ -92,7 +92,7 @@ void setup()
 void loop() 
 {   
     //Call to these two functions to refresh library received data.
-    g_objRF.updateBuffer();             
+    g_objRF.updateBuffer();
     unsigned short int nProcessResult = g_objRF.processReceivedString(); 
     
     if (nProcessResult == _RFE_SUCCESS) 
@@ -110,7 +110,7 @@ void loop()
                 g_objRF.getMonitorSerial().print(nPeakDBM);
                 g_objRF.getMonitorSerial().println(" dBm"); 
 
-                if(nPeakDBM > -80)
+                if(nPeakDBM > -75)
                 {
                     ToneBuzzer(A5,1000, 2000); // tone on pin-8 with 1000 Hz for 2000 milliseconds
                 }
@@ -122,7 +122,7 @@ void loop()
         // _RFE_IGNORE or _RFE_NOT_MESSAGE are not errors, it just mean a new message was not available
         if ((nProcessResult != _RFE_IGNORE) && (nProcessResult != _RFE_NOT_MESSAGE))
         {
-            //Report for information
+            //Report error information
             g_objRF.getMonitorSerial().print("Error:");
             g_objRF.getMonitorSerial().println(nProcessResult);
         }
